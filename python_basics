@@ -1,0 +1,17 @@
+#!/bin/python3
+
+#1. cretae variables for name, age and degree
+name = ""
+age = 0
+degree_program = ""
+
+#2. Take user input for all three variables
+name = input("Enter your name")
+age = int(input("Enter your age"))
+degree_program = input("Enter your degree program")
+
+#3. calculate remaining age
+remaining_age = (age * 3) % 2
+
+#4. print message with string concatenation 
+print("My name is "+ name +". My remaining age is "+ str(remaining_age) + " and I am majoring in" + degree_program + " at NOVA ")
