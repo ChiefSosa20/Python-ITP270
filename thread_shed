@@ -1,0 +1,67 @@
+#!/bin/python3
+
+daily_sales_replaced = daily_sales.replace(';,;', ';')
+
+daily_transactions = daily_sales_replaced.split(',')
+
+# print(daily_transactions)
+daily_transactions_split = []
+for item in daily_transactions:
+    daily_transactions_split.append(item.split(';'))
+# print(daily_transactions_split)
+transactions_clean = []
+
+for transaction in daily_transactions_split:
+    stripped_list = []
+    for items in transaction:
+        stripped_list.append(items.strip())
+    transactions_clean.append(stripped_list)
+# print(transactions_clean)
+
+
+customers = []
+sales = []
+thread_sold = []
+
+for transaction in transactions_clean:
+    customers.append(transaction[0])
+    sales.append(transaction[1])
+    thread_sold.append(transaction[2])
+
+# print(customers)
+# print(sales)
+# print(thread_sold)
+
+total_sales = 0
+
+for sale in sales:
+    total_sales += float(sale.strip('$'))
+
+# print(total_sales)
+# print(thread_sold)
+
+
+thread_sold_split = []
+
+for thread in thread_sold:
+    if '&' not in thread:
+        thread_sold_split.append(thread)
+    else:
+        thread_sold_split += thread.split('&')
+
+
+# print(thread_sold_split)
+
+def color_count(color):
+    return thread_sold_split.count(color)
+
+
+# print(color_count('white'))
+
+colors = ['red', 'yellow', 'green', 'white', 'black', 'blue', 'purple']
+
+empty_list = []
+for color in thread_sold_split:
+    if color not in empty_list:
+        print("Thread Shed sold {} threads of {} thread today.".format(color_count(color), color))
+        empty_list.append(color)
